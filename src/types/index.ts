@@ -20,16 +20,17 @@ export interface ICatalogState {
 
 export interface ICatalogActions {
   setCards(data: ICard[]): void;
-  setCardSelected(id: string): void;
-  getCards(): ICardWithSelection[];
-  getCard(id: string): ICardWithSelection | undefined;
-  toggleCardInBasket(id: string): void;
-  getCardsBasket(): ICardWithSelection[];
-  getCardIdsBasket(): string[];
+  setSelectedCard(id: string): void;
+  getAllCards(): ICardWithSelection[];
+  getCardByID(id: string): ICardWithSelection | null;
+  toggleCardBasketStatus(id: string): void;
+  getBasketCards(): ICardWithSelection[];
+  getBasketCardsID(): string[];
   getBasketItemCount(): number;
-  getBasketTotalPrice(): number;
+  calculateTotalBasketPrice(): number;
   clearBasket(): void;
   isCardInBasket(id: string): boolean;
+  isBasketNotEmpty(): boolean;
 }
 
 // Пользователь
