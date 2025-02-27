@@ -14,11 +14,11 @@ export interface ICardWithSelection extends ICard {
 }
 
 // Каталог
-export interface ICatalogState {
+export interface ICardsListState {
   cards: ICardWithSelection[];
 }
 
-export interface ICatalogActions {
+export interface ICardsListActions {
   setCards(data: ICard[]): void;
   setSelectedCard(id: string): void;
   getAllCards(): ICardWithSelection[];

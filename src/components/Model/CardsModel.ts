@@ -1,11 +1,11 @@
-import { ICard, ICardWithSelection, ICatalogActions, ICatalogState } from '../../types';
+import { ICard, ICardWithSelection, ICardsListActions, ICardsListState } from '../../types';
 import { IEvents } from '../base/events';
 import { Model } from '../base/Model';
 
-export class CatalogData extends Model<ICatalogState> implements ICatalogActions {
+export class CardsListData extends Model<ICardsListState> implements ICardsListActions {
   protected cards: ICardWithSelection[];
 
-  constructor(events: IEvents, data: Partial<ICatalogState> = { cards: [] }) {
+  constructor(events: IEvents, data: Partial<ICardsListState> = { cards: [] }) {
     super(data, events);
     this.cards = data.cards;
   }
