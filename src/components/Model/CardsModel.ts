@@ -2,7 +2,7 @@ import { ICard, ICardWithSelection, ICardsListActions, ICardsListState } from '.
 import { IEvents } from '../base/events';
 import { Model } from '../base/Model';
 
-export class CardsListData extends Model<ICardsListState> implements ICardsListActions {
+export class CardsModel extends Model<ICardsListState> implements ICardsListActions {
   protected cards: ICardWithSelection[];
 
   constructor(events: IEvents, data: Partial<ICardsListState> = { cards: [] }) {
@@ -20,7 +20,7 @@ export class CardsListData extends Model<ICardsListState> implements ICardsListA
 
     //console.log('setCards вызван, количество карточек:', this.cards.length);
 
-    this.emitChanges('cardsListData:changed');
+    this.emitChanges('cardsModel:changed');
   }
 
   // Делает указанную карточку выбранной, сбрасывая выбор у остальных
@@ -29,7 +29,7 @@ export class CardsListData extends Model<ICardsListState> implements ICardsListA
     const card = this.getCardByID(id);
     if (card) {
       card.isSelected = true;
-      this.emitChanges('cardsListData:selectedChanged', { id });
+      this.emitChanges('cardsModel:selectedChanged', { id });
     }
   }
 
@@ -49,10 +49,10 @@ export class CardsListData extends Model<ICardsListState> implements ICardsListA
     if (!card) return;
 
     card.isBasket = !card.isBasket;
-    this.emitChanges('cardsListData:basketChanged');
+    this.emitChanges('cardsModel:basketChanged');
 
     if (card.isSelected) {
-      this.emitChanges('cardsListData:selectedChanged', { id });
+      this.emitChanges('cardsModel:selectedChanged', { id });
     }
   }
 
@@ -83,7 +83,7 @@ export class CardsListData extends Model<ICardsListState> implements ICardsListA
       card.isBasket = false;
       card.isSelected = false;
     });
-    this.emitChanges('cardsListData:basketChanged');
+    this.emitChanges('cardsModel:basketChanged');
   }
 
   // Проверяет, находится ли карточка в корзине

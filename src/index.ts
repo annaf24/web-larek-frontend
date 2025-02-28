@@ -1,6 +1,6 @@
 import { Api } from './components/base/api';
 import { EventEmitter } from './components/base/events';
-import { CardsListData } from './components/Model/CardsModel';
+import { CardsModel } from './components/Model/CardsModel';
 import { UserData } from './components/Model/UserModel';
 import { Basket } from './components/View/Basket';
 import { CardList } from './components/View/CardList';
@@ -20,7 +20,7 @@ const events = new EventEmitter();
 const api = new WebLarekFrontendAPI(CDN_URL, API_URL);
 
 // Модели данных
-const cardsData = new CardsListData(events);
+const cardsData = new CardsModel(events);
 const userData = new UserData(events)
 
 // Глобальные контейнеры
@@ -46,19 +46,34 @@ const order = new Order(cloneTemplate(orderTemplate), events);
 const contacts = new Contacts(cloneTemplate(contactsTemplate), events);
 const orderSuccess = new OrderSuccess(cloneTemplate(orderSuccessTemplate), events);
 
-// Получение карточек с сервера
-api.getCardsAPI()
-  .then(cardsData.setCards.bind(cardsData))
-  .catch(err => console.error(err));
 
-// Вывод карточек на экран
-events.on('cardsListData:changed', () => {});
+  api.getCardsAPI()
+  .then(data => {
+    // console.log('Данные с API:', data);
+    cardsData.setCards(data);
+  })
+  .catch(err => console.error('Ошибка загрузки карточек:', err));
+
+//LOG Вывод карточек на экран
+events.on('cardsModel:changed', () => {
+  const cardsArray = cardsData.getAllCards().map(item =>
+    new CardList(cloneTemplate(cardListTemplate,), events)
+    .render(item)
+  )
+  //LOG console.log('Рендер карточек:', cardsArray);
+  page.render({
+    cardsList: cardsArray,
+  })
+});
+
+
+
 // Открытие карточки товара
 events.on('cardList:clickCard', () => {});
 // Добавление товара в корзину
 events.on('cardPreview:clickButton', () => {});
 // Изменение корзины (добавление товара, счетчик)
-events.on('cardsListData:basketChanged', () => {});
+events.on('cardsModel:basketChanged', () => {});
 // Открытие корзины
 events.on('basket:open', () => {});
 // Удаление товара из корзины

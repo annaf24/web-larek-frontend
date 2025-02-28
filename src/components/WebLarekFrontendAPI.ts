@@ -16,7 +16,7 @@ export class WebLarekFrontendAPI extends Api{
 // УДАЛИТЬ console.log
     getCardsAPI(): Promise<ICard[]> {
         return this.get('/product').then((data: ApiListResponse<ICard>) => {
-            //console.log('Данные с сервера:', data.items);
+            console.log('Данные с сервера:', data.items);
             return data.items.map((item) => ({
                 ...item,
                 image: this.cdn + item.image
