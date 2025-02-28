@@ -10,13 +10,16 @@ export class CardsListData extends Model<ICardsListState> implements ICardsListA
     this.cards = data.cards;
   }
 
-  // Устанавливает новые карточки каталога, добавляя свойства выбора и корзины.
+  // Устанавливает новые карточки каталога, добавляя свойства выбора и корзины
   setCards(cardsData: ICard[]): void {
     this.cards = cardsData.map(card => ({
       ...card,
       isBasket: false,
       isSelected: false
     }));
+
+    //console.log('setCards вызван, количество карточек:', this.cards.length);
+
     this.emitChanges('cardsListData:changed');
   }
 

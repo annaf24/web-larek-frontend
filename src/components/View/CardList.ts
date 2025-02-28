@@ -29,7 +29,7 @@ export class CardList extends Card<TCardCatalog> {
       if (target.closest('.card__button')) {
         this.events.emit('cardPreview:clickButton', { id: this._id });
       } else {
-        this.events.emit('cardCatalog:clickCard', { id: this._id });
+        this.events.emit('cardList:clickCard', { id: this._id });
       }
     });
   }

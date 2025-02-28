@@ -3,7 +3,7 @@ import { ensureAllElements } from '../../utils/utils';
 import { IEvents } from '../base/events';
 import { Form } from './Form';
 
-export class UserOrder extends Form<TUserOrder> {
+export class Order extends Form<TUserOrder> {
   protected paymentButton: HTMLButtonElement[];
 
   constructor(container: HTMLFormElement, events: IEvents) {
@@ -34,10 +34,6 @@ export class UserOrder extends Form<TUserOrder> {
   // Устанавливаем значение адреса в поле формы
   set address(value: string) {
     const addressInput = this.container.elements.namedItem('address') as HTMLInputElement;
-    if (addressInput) {
-      addressInput.value = value;
-    } else {
-      console.warn('Address input field not found in form.');
-    }
+    addressInput.value = value;
   }
 }

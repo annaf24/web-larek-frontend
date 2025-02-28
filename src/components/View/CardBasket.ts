@@ -13,7 +13,7 @@ export class CardBasket extends Card<TCardBasket> {
     this._button = ensureElement('.card__button', this.container) as HTMLButtonElement;
     this._index = ensureElement('.basket__item-index', this.container) as HTMLElement;
 
-    this._button.addEventListener('click', () => this.events.emit('cardBaske:clickDeleteButton', { id: this._id }));
+    this._button.addEventListener('click', () => this.events.emit('cardBasket:delete', { id: this._id }));
   }
 
   //Устанавливает индекс элемента в корзине

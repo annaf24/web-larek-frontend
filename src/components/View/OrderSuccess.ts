@@ -3,7 +3,7 @@ import { ensureElement } from '../../utils/utils';
 import { Component } from '../base/components';
 import { IEvents } from '../base/events';
 
-export class Success extends Component<IOrderSuccess> {
+export class OrderSuccess extends Component<IOrderSuccess> {
   protected _total: HTMLElement;
   protected button: HTMLButtonElement;
 
