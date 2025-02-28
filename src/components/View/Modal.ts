@@ -26,7 +26,7 @@ export class Modal extends Component<IModal> {
   }
 
   set content(value: HTMLElement) {
-    this._content.replaceChildren(value ?? document.createElement("div")); // ✅ Исправлено
+    this._content.replaceChildren(value);
   }
 
   open() {
